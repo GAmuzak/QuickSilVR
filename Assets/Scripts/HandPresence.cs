@@ -23,7 +23,6 @@ public class HandPresence : MonoBehaviour
         targetDevice = devices[0];
         spawnedHandModel = Instantiate(handModelPrefab, transform);
         handAnimator = spawnedHandModel.GetComponent<Animator>();
-        Debug.Log(targetDevice);
     }
 
     private void UpdateHandAnimation()
