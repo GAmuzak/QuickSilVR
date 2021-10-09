@@ -1,2 +1,2 @@
 # QuickSilVR
- VR Hoard Shooter Prototype
+ VR Horde Shooter Prototype
