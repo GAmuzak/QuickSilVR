@@ -19,11 +19,12 @@ public class Shooting : MonoBehaviour
     {
         gunRecoil = transform.GetChild(0).GetComponent<GunRecoil>();
     }
-
+    
+    
     public void Shoot()
     {
         if (!canShoot) return;
-        Debug.Log("shooting!");
+        //Debug.Log("shooting!");
         Instantiate(bullet, bulletPos.position, Quaternion.identity);
         gunRecoil.Recoil();
         canShoot = false;
@@ -41,7 +42,7 @@ public class Shooting : MonoBehaviour
 
     private IEnumerator FireRateController()
     {
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         canShoot = true;
     }
 }
