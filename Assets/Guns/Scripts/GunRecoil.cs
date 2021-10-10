@@ -3,11 +3,13 @@ using System.Collections;
 
 public class GunRecoil : MonoBehaviour
 {
-    Vector3 newPos;
-    Vector3 startPos;
+    [SerializeField] private float moveBack = .01f;
+    [SerializeField] private float speed = 10f;
+    [SerializeField] private float muzzleImpactDelay;
 
-    public float moveBack = .01f;
-    public float speed = 10f;
+    private Vector3 newPos;
+    private Vector3 startPos;
+    private float timeElapsed;
 
     private void Start()
     {
@@ -16,19 +18,38 @@ public class GunRecoil : MonoBehaviour
 
     private void Update()
     {
-        transform.localPosition = Vector3.Slerp(transform.localPosition, newPos, speed * Time.deltaTime);
+        // transform.localPosition = Vector3.Slerp(transform.localPosition, newPos, speed * Time.deltaTime);
+        //
+        // // if (1>2)
+        // // {
+        // //     newPos = startPos + Vector3.right * moveBack;
+        // //     StartCoroutine(Delay());
+        // // }
+    }
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            newPos = startPos + Vector3.right * moveBack;
-            StartCoroutine(Delay());
-        }
+    public void Recoil()
+    {
+        newPos = startPos + Vector3.right * moveBack;
+        StartCoroutine(Delay());
+        StartCoroutine(RecoilSlerpCoroutine());
     }
 
     private IEnumerator Delay()
     {
-        yield return new WaitForSeconds(.1f);
+        yield return new WaitForSeconds(muzzleImpactDelay);
         newPos = startPos;
+    }
+
+    private IEnumerator RecoilSlerpCoroutine()
+    {
+        timeElapsed = 0;
+        float totalTime = speed * Time.deltaTime;
+        if (timeElapsed < totalTime)
+        {
+            transform.localPosition = Vector3.Slerp(transform.localPosition, newPos, speed * Time.deltaTime);
+            timeElapsed += Time.deltaTime;
+            yield return null;
+        }
     }
 
 }
