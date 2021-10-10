@@ -11,12 +11,12 @@ public class Shooting : MonoBehaviour
 
     public void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Instantiate(bullet, bulletPos.position, Quaternion.identity);
-
-            Ray();
-        }
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     Instantiate(bullet, bulletPos.position, Quaternion.identity);
+        //
+        //     Ray();
+        // }
     }
 
     private void Ray()

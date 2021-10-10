@@ -18,11 +18,11 @@ public class GunRecoil : MonoBehaviour
     {
         transform.localPosition = Vector3.Slerp(transform.localPosition, newPos, speed * Time.deltaTime);
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            newPos = startPos + Vector3.right * moveBack;
-            StartCoroutine(Delay());
-        }
+        // if (Input.GetMouseButtonDown(0))
+        // {
+        //     newPos = startPos + Vector3.right * moveBack;
+        //     StartCoroutine(Delay());
+        // }
     }
 
     private IEnumerator Delay()
