@@ -7,6 +7,4 @@ public class GunRecoil : MonoBehaviour
     {
         GetComponent<Animator>().Play("Recoil", -1, 0f);
     }
-
-
 }

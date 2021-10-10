@@ -13,22 +13,35 @@ public class Shooting : MonoBehaviour
     // [SerializeField] private TYPE _type;
 
     private GunRecoil gunRecoil;
+    private Ammo ammoSetup;
     private bool canShoot=true;
 
     private void Start()
     {
         gunRecoil = transform.GetChild(0).GetComponent<GunRecoil>();
+        ammoSetup = GetComponent<Ammo>();
     }
-    
-    
+
+    private void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Shoot();
+        }
+    }
+
     public void Shoot()
     {
-        if (!canShoot) return;
-        //Debug.Log("shooting!");
-        Instantiate(bullet, bulletPos.position, Quaternion.identity);
-        gunRecoil.Recoil();
-        canShoot = false;
-        StartCoroutine(FireRateController());
+        if (ammoSetup.ammo != 0)
+        {
+            if (!canShoot) return;
+            //Debug.Log("shooting!");
+            Instantiate(bullet, bulletPos.position, Quaternion.identity);
+            gunRecoil.Recoil();
+            ammoSetup.Shoot();
+            canShoot = false;
+            StartCoroutine(FireRateController());
+        }
     }
 
     private void Ray()
