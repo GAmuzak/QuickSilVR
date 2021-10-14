@@ -3,13 +3,12 @@ using UnityEngine.UI;
 
 public class Ammo : MonoBehaviour
 {
+    public Text ammoCount;
+
     [SerializeField]
     private float maxAmmo;
-
-    [HideInInspector]
-    public float ammo;
-
-    public Text ammoCount;
+    
+    private float ammo;
 
     private void Start()
     {

@@ -2,12 +2,11 @@ using UnityEngine;
 
 public class AmmoPickup : MonoBehaviour
 {
-    GameObject[] ammoBlock;
-
-    Ammo gun;
-
     [SerializeField]
     private Material red;
+
+    private GameObject[] ammoBlock;
+    private Ammo gun;
 
     private void Start()
     {
@@ -19,8 +18,9 @@ public class AmmoPickup : MonoBehaviour
     {
         if (ammoBlock.Length != 0 && GetClosestEnemy(ammoBlock) && gun.ammo < 14)
         {
-            if (Vector3.Distance(transform.position, GetClosestEnemy(ammoBlock).position) < 2f && 
-                GetClosestEnemy(ammoBlock).GetComponent<MeshRenderer>().material.color == Color.blue)
+            bool isEnemyNearPlayer = Vector3.Distance(transform.position, GetClosestEnemy(ammoBlock).position) < 2f;
+            bool isAmmoAvailable = GetClosestEnemy(ammoBlock).GetComponent<MeshRenderer>().material.color == Color.blue;
+            if (isEnemyNearPlayer && isAmmoAvailable)
             {
                 gun.ammo = 14;
                 gun.ammoCount.text = gun.ammo.ToString();
@@ -45,4 +45,11 @@ public class AmmoPickup : MonoBehaviour
         }
         return tMin.transform;
     }
+}
+
+public enum Objects
+{
+    NULL=-1,
+    Gun=0,
+    AmmoBlock=1
 }
