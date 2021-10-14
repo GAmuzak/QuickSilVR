@@ -6,6 +6,9 @@ public class AmmoPickup : MonoBehaviour
 
     Ammo gun;
 
+    [SerializeField]
+    private Material red;
+
     private void Start()
     {
         ammoBlock = GameObject.FindGameObjectsWithTag("Ammo Block");
@@ -14,10 +17,15 @@ public class AmmoPickup : MonoBehaviour
 
     private void Update()
     {
-        if (Vector3.Distance(transform.position, GetClosestEnemy(ammoBlock).position) < 2f)
+        if (ammoBlock.Length != 0 && GetClosestEnemy(ammoBlock) && gun.ammo < 14)
         {
-            gun.ammo = 14;
-            Destroy(GetClosestEnemy(ammoBlock).gameObject);
+            if (Vector3.Distance(transform.position, GetClosestEnemy(ammoBlock).position) < 2f && 
+                GetClosestEnemy(ammoBlock).GetComponent<MeshRenderer>().material.color == Color.blue)
+            {
+                gun.ammo = 14;
+                gun.ammoCount.text = gun.ammo.ToString();
+                GetClosestEnemy(ammoBlock).GetComponent<MeshRenderer>().material = red;
+            }
         }
     }
 
